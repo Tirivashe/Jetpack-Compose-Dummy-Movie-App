@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.movieapp.model.Movie
-import com.example.movieapp.model.getMovies
+import com.example.movieapp.utils.getMovies
 import com.example.movieapp.widgets.MovieCard
 
 @Composable
@@ -28,28 +28,33 @@ fun DetailsScreen(navController: NavController, movieId: String?){
     val movie = movieList[0]
 
     Scaffold(
-        topBar = { TopBarComposable(navController) }
+        topBar = { DetailsTopAppBar(navController) }
     ) {
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
+        DetailsMainContent(movie)
+    }
+}
+
+@Composable
+private fun DetailsMainContent(movie: Movie) {
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top
-            ) {
-                MovieCard(movie = movie)
-                Spacer(modifier = Modifier.height(8.dp))
-                Divider()
-                Text(text = "Movie Images")
-                ImageCarosel(movie)
-            }
+            MovieCard(movie = movie)
+            Spacer(modifier = Modifier.height(8.dp))
+            Divider()
+            Text(text = "Movie Images")
+            ImageCarousel(movie)
         }
     }
 }
 
 @Composable
-private fun ImageCarosel(movie: Movie) {
+private fun ImageCarousel(movie: Movie) {
     LazyRow {
         items(movie.images) { image ->
             Card(
@@ -65,7 +70,7 @@ private fun ImageCarosel(movie: Movie) {
 }
 
 @Composable
-fun TopBarComposable(navController: NavController){
+fun DetailsTopAppBar(navController: NavController){
     TopAppBar(
         backgroundColor = Color.LightGray,
         elevation = 3.dp

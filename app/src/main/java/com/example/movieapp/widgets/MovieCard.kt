@@ -9,7 +9,6 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
@@ -56,7 +55,6 @@ fun MovieCard(movie: Movie, onItemClick: (String) -> Unit = {}){
                 shape = RectangleShape,
                 elevation = 4.dp
             ) {
-                //Icon(imageVector = Icons.Default.AccountBox, contentDescription = "Movie Image")
                 Image(
                     painter = rememberImagePainter(
                         data = movie.images[0],
